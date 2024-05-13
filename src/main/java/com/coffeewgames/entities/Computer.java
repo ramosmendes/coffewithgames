@@ -1,9 +1,9 @@
-package com.coffeewgames.demo.entities;
+package com.coffeewgames.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.coffeewgames.demo.entities.enums.TypePc;
+import com.coffeewgames.entities.enums.TypePc;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
@@ -36,10 +36,6 @@ public class Computer implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.typePc = typePc;
-	}
-
-	public Integer getPrice() {
-		return typePc.getPrice();
 	}
 
 	public Long getId() {

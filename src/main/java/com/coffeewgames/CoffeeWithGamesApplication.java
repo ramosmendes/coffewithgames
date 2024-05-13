@@ -1,4 +1,4 @@
-package com.coffeewgames.demo;
+package com.coffeewgames;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

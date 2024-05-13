@@ -1,4 +1,4 @@
-package com.coffeewgames.demo.entities;
+package com.coffeewgames.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class User implements Serializable {
 
 	}
 
-	public User(String name, Integer age, String email, String password, Integer wallet) {
+	public User(String name, Integer age, String email, String password, Double wallet) {
 		super();
 		this.name = name;
 		this.age = age;
@@ -43,7 +43,7 @@ public class User implements Serializable {
 	private String password;
 
 	@Nonnull
-	private Integer wallet;
+	private Double wallet;
 
 	@Nonnull
 	private Integer age;
@@ -76,7 +76,7 @@ public class User implements Serializable {
 		return id;
 	}
 
-	public Integer getWallet() {
+	public Double getWallet() {
 		return wallet;
 	}
 

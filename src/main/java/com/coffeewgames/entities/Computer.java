@@ -7,6 +7,8 @@ import com.coffeewgames.entities.enums.TypePc;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +17,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_computer")
 public class Computer implements Serializable {
+
+	public Computer() {
+
+	}
+
+	public Computer(String name, TypePc typePc) {
+		this.name = name;
+		this.typePc = typePc;
+	}
 
 	private static final long serialVersionUID = 1;
 
@@ -26,17 +37,8 @@ public class Computer implements Serializable {
 	private String name;
 
 	@Nonnull
+	@Enumerated(EnumType.STRING)
 	private TypePc typePc;
-
-	public Computer() {
-
-	}
-
-	public Computer(Long id, String name, TypePc typePc) {
-		this.id = id;
-		this.name = name;
-		this.typePc = typePc;
-	}
 
 	public Long getId() {
 		return id;
@@ -73,6 +75,11 @@ public class Computer implements Serializable {
 			return false;
 		Computer other = (Computer) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "Computer [id=" + id + ", name=" + name + ", typePc=" + typePc + "]";
 	}
 
 }

@@ -1,13 +1,18 @@
 package com.coffeewgames.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +52,10 @@ public class User implements Serializable {
 
 	@Nonnull
 	private Integer age;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Rent> rents = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -94,6 +103,10 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public List<Rent> getRent() {
+		return rents;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -108,7 +121,11 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
-
 }

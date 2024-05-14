@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.coffeewgames.entities.enums.TypePc;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,6 +41,10 @@ public class Computer implements Serializable {
 	@Nonnull
 	@Enumerated(EnumType.STRING)
 	private TypePc typePc;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "pc")
+	private Rent rents;
 
 	public Long getId() {
 		return id;
@@ -76,10 +82,4 @@ public class Computer implements Serializable {
 		Computer other = (Computer) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	@Override
-	public String toString() {
-		return "Computer [id=" + id + ", name=" + name + ", typePc=" + typePc + "]";
-	}
-
 }

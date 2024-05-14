@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.Formula;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +33,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.wallet = wallet;
+		this.adult = age >= 18;
 	}
 
 	private static final long serialVersionUID = 1;
@@ -52,6 +56,11 @@ public class User implements Serializable {
 
 	@Nonnull
 	private Integer age;
+
+	@Nonnull
+	@Formula("CASE WHEN age >= 18 THEN true ELSE false END")
+	@Column(name = "IS_ADULT")
+	private boolean adult;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
@@ -97,10 +106,8 @@ public class User implements Serializable {
 		this.age = age;
 	}
 
-	public boolean isAdult() {
-		if (age >= 18)
-			return true;
-		return false;
+	public boolean getAdult() {
+		return adult;
 	}
 
 	public List<Rent> getRent() {

@@ -18,7 +18,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_order")
+@Table(name = "tb_rent")
 public class Rent implements Serializable {
 
 	public Rent() {

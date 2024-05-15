@@ -1,25 +1,23 @@
 package com.coffeewgames.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
-import com.coffeewgames.entities.enums.TypePc;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_computer")
-public class Computer implements Serializable {
+@Table(name = "tb_payment")
+public class Payment implements Serializable {
 
 	private static final long serialVersionUID = 1;
 
@@ -28,46 +26,41 @@ public class Computer implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-	@Nonnull
-	@Column(name = "name")
-	private String name;
-
-	@Nonnull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "type_pc")
-	private TypePc typePc;
+	@Column(name = "payment_instant")
+	private Instant moment;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "pc")
-	private Rent rents;
+	@OneToOne
+	@MapsId
+	private Rent rent;
 
-	public Computer() {
+	public Payment() {
 
 	}
 
-	public Computer(String name, TypePc typePc) {
-		this.name = name;
-		this.typePc = typePc;
+	public Payment(Instant moment, Rent rent) {
+		this.moment = moment;
+		this.rent = rent;
+	}
+
+	public Instant getMoment() {
+		return moment;
+	}
+
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+
+	public Rent getRent() {
+		return rent;
+	}
+
+	public void setRent(Rent rent) {
+		this.rent = rent;
 	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public TypePc getTypePc() {
-		return typePc;
-	}
-
-	public void setTypePc(TypePc typePc) {
-		this.typePc = typePc;
 	}
 
 	@Override
@@ -83,7 +76,8 @@ public class Computer implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Computer other = (Computer) obj;
+		Payment other = (Payment) obj;
 		return Objects.equals(id, other.id);
 	}
+
 }

@@ -40,26 +40,32 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 
 	@Nonnull
+	@Column(name = "name")
 	private String name;
 
 	@Nonnull
+	@Column(name = "email")
 	private String email;
 
 	@Nonnull
+	@Column(name = "password")
 	private String password;
 
 	@Nonnull
+	@Column(name = "wallet")
 	private Double wallet;
 
 	@Nonnull
+	@Column(name = "age")
 	private Integer age;
 
 	@Nonnull
 	@Formula("CASE WHEN age >= 18 THEN true ELSE false END")
-	@Column(name = "IS_ADULT")
+	@Column(name = "is_adult")
 	private boolean adult;
 
 	@JsonIgnore

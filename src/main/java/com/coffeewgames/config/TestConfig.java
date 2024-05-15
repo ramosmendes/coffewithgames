@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.coffeewgames.entities.Computer;
+import com.coffeewgames.entities.Payment;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.User;
 import com.coffeewgames.entities.enums.RentStatus;
@@ -47,5 +48,10 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		pcRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 		rentRepository.saveAll(Arrays.asList(r1, r2, r3));
+
+		Payment p1 = new Payment(Instant.now(), r1);
+		r1.setPayment(p1);
+
+		rentRepository.save(r1);
 	}
 }

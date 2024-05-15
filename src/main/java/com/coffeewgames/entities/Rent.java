@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.coffeewgames.entities.enums.RentStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,6 +37,7 @@ public class Rent implements Serializable {
 	@Column(name = "rent_status")
 	private RentStatus rentStatus;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;

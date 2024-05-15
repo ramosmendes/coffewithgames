@@ -1,9 +1,9 @@
 package com.coffeewgames.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import org.hibernate.annotations.Formula;
 
@@ -68,9 +68,8 @@ public class User implements Serializable {
 	@Column(name = "is_adult")
 	private boolean adult;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Rent> rents = new ArrayList<>();
+	private Set<Rent> rents = new HashSet<>();
 
 	public String getName() {
 		return name;
@@ -116,7 +115,7 @@ public class User implements Serializable {
 		return adult;
 	}
 
-	public List<Rent> getRent() {
+	public Set<Rent> getRent() {
 		return rents;
 	}
 

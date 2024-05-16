@@ -7,8 +7,6 @@ import java.util.Set;
 
 import org.hibernate.annotations.Formula;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

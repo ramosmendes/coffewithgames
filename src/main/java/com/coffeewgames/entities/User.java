@@ -101,6 +101,10 @@ public class User implements Serializable {
 		return wallet;
 	}
 
+	public void setWallet(Double wallet) {
+		this.wallet = wallet;
+	}
+
 	public Integer getAge() {
 		return age;
 	}
@@ -111,6 +115,10 @@ public class User implements Serializable {
 
 	public boolean getAdult() {
 		return adult;
+	}
+
+	public void setAdult() {
+		this.adult = getAge() >= 18;
 	}
 
 	public Set<Rent> getRent() {

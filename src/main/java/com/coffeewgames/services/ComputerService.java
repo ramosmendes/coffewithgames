@@ -41,5 +41,6 @@ public class ComputerService {
 	private void updateData(Computer entity, Computer obj) {
 		entity.setName(obj.getName());
 		entity.setTypePc(obj.getTypePc());
+
 	}
 }

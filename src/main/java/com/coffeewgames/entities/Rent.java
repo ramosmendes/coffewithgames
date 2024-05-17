@@ -85,6 +85,10 @@ public class Rent implements Serializable {
 		return moment;
 	}
 
+	public void setMoment(Instant moment) {
+		this.moment = moment;
+	}
+
 	public User getClient() {
 		return client;
 	}

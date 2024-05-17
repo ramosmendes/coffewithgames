@@ -41,9 +41,9 @@ public class TestConfig implements CommandLineRunner {
 		Computer c3 = new Computer("PC-03", TypePc.ULTRA);
 		Computer c4 = new Computer("PC-01", TypePc.MEDIUM);
 
-		Rent r1 = new Rent(Instant.now(), RentStatus.PENDING, u1, c1);
-		Rent r2 = new Rent(Instant.now(), RentStatus.PAID, u1, c2);
-		Rent r3 = new Rent(Instant.parse("2020-04-20T16:53:07Z"), RentStatus.PAID, u2, c3);
+		Rent r1 = new Rent(RentStatus.PENDING, u1, c1);
+		Rent r2 = new Rent(RentStatus.PENDING, u1, c2);
+		Rent r3 = new Rent(RentStatus.PAID, u2, c3);
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		pcRepository.saveAll(Arrays.asList(c1, c2, c3, c4));

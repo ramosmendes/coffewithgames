@@ -53,9 +53,9 @@ public class Rent implements Serializable {
 
 	}
 
-	public Rent(Instant moment, RentStatus rentStatus, User client, Computer pc) {
+	public Rent(RentStatus rentStatus, User client, Computer pc) {
 		super();
-		this.moment = moment;
+		this.moment = Instant.now();
 		this.rentStatus = rentStatus;
 		this.client = client;
 		this.pc = pc;
@@ -98,6 +98,7 @@ public class Rent implements Serializable {
 	}
 
 	public void setPayment(Payment payment) {
+		setRentStatus(RentStatus.PAID);
 		this.payment = payment;
 	}
 

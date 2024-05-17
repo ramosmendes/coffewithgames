@@ -37,7 +37,7 @@ public class TestConfig implements CommandLineRunner {
 		Computer c1 = new Computer("PC-01", TypePc.LOW);
 		Computer c2 = new Computer("PC-02", TypePc.HIGH);
 		Computer c3 = new Computer("PC-03", TypePc.ULTRA);
-		Computer c4 = new Computer("PC-01", TypePc.MEDIUM);
+		Computer c4 = new Computer("PC-04", TypePc.MEDIUM);
 
 		Rent r1 = new Rent(u1, c1,1.0);
 		Rent r2 = new Rent(u1, c2,2.0);

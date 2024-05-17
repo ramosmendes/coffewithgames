@@ -33,6 +33,12 @@ public class Rent implements Serializable {
 	@Column(name = "payment_instant")
 	private Instant moment;
 
+	@Column(name = "time_rent")
+	private Double time;
+
+	@Column(name = "value_rent")
+	private Double value;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "rent_status")
 	private RentStatus rentStatus;
@@ -53,10 +59,12 @@ public class Rent implements Serializable {
 
 	}
 
-	public Rent(RentStatus rentStatus, User client, Computer pc) {
+	public Rent(User client, Computer pc, Double time) {
 		super();
 		this.moment = Instant.now();
-		this.rentStatus = rentStatus;
+		this.time = time;
+		setValue(pc);
+		rentStatus = RentStatus.PENDING;
 		this.client = client;
 		this.pc = pc;
 	}
@@ -100,6 +108,38 @@ public class Rent implements Serializable {
 	public void setPayment(Payment payment) {
 		setRentStatus(RentStatus.PAID);
 		this.payment = payment;
+	}
+
+	public Double getTime() {
+		return time;
+	}
+
+	public void setTime(Double time) {
+		this.time = time;
+	}
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Computer pc) {
+		switch (pc.getTypePc().getCode()) {
+		case 1:
+			value = 1 * time;
+			break;
+		case 2:
+			value = 2 * time;
+			break;
+		case 3:
+			value = 3.5 * time;
+			break;
+		case 4:
+			value = 5 * time;
+			break;
+		default:
+			throw new IllegalArgumentException("code invalid");
+		}
+
 	}
 
 	@Override

@@ -38,8 +38,8 @@ public class Payment implements Serializable {
 
 	}
 
-	public Payment(Instant moment, Rent rent) {
-		this.moment = moment;
+	public Payment(Rent rent) {
+		this.moment = Instant.now();
 		this.rent = rent;
 	}
 

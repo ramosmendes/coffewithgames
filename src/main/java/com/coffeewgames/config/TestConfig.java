@@ -1,6 +1,5 @@
 package com.coffeewgames.config;
 
-import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import com.coffeewgames.entities.Computer;
 import com.coffeewgames.entities.Payment;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.User;
-import com.coffeewgames.entities.enums.RentStatus;
 import com.coffeewgames.entities.enums.TypePc;
 import com.coffeewgames.repositories.ComputerRepository;
 import com.coffeewgames.repositories.RentRepository;
@@ -41,15 +39,15 @@ public class TestConfig implements CommandLineRunner {
 		Computer c3 = new Computer("PC-03", TypePc.ULTRA);
 		Computer c4 = new Computer("PC-01", TypePc.MEDIUM);
 
-		Rent r1 = new Rent(RentStatus.PENDING, u1, c1);
-		Rent r2 = new Rent(RentStatus.PENDING, u1, c2);
-		Rent r3 = new Rent(RentStatus.PAID, u2, c3);
+		Rent r1 = new Rent(u1, c1,1.0);
+		Rent r2 = new Rent(u1, c2,2.0);
+		Rent r3 = new Rent(u2, c3,2.5);
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		pcRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 		rentRepository.saveAll(Arrays.asList(r1, r2, r3));
 
-		Payment p1 = new Payment(Instant.now(), r1);
+		Payment p1 = new Payment(r1);
 		r1.setPayment(p1);
 
 		rentRepository.save(r1);

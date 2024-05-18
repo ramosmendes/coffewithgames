@@ -68,6 +68,8 @@ public class Computer implements Serializable {
 
 	public void setTypePc(TypePc typePc) {
 		this.typePc = typePc;
+		if (this.rents != null)
+			this.rents.setValue(this);
 	}
 
 	@Override

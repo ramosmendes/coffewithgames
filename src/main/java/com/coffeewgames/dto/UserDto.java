@@ -4,18 +4,18 @@ import org.springframework.beans.BeanUtils;
 
 import com.coffeewgames.entities.User;
 
-public class UserDTO {
+public class UserDto {
 
 	private Long id;
 	private String name;
 	private String email;
 	private Double wallet;
 
-	public UserDTO(User user) {
+	public UserDto(User user) {
 		BeanUtils.copyProperties(user, this);
 	}
 
-	public UserDTO() {
+	public UserDto() {
 
 	}
 

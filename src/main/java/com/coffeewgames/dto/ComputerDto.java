@@ -5,17 +5,17 @@ import org.springframework.beans.BeanUtils;
 import com.coffeewgames.entities.Computer;
 import com.coffeewgames.entities.enums.TypePc;
 
-public class ComputerDTO {
+public class ComputerDto {
 
 	private Long id;
 	private String name;
 	private TypePc typePc;
 
-	public ComputerDTO(Computer pc) {
+	public ComputerDto(Computer pc) {
 		BeanUtils.copyProperties(pc, this);
 	}
 
-	public ComputerDTO() {
+	public ComputerDto() {
 
 	}
 

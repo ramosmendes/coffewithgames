@@ -7,14 +7,14 @@ import org.springframework.beans.BeanUtils;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.enums.RentStatus;
 
-public class RentDTO {
+public class RentDto {
 
 	private Long id;
 	private Instant moment;
 	private Double value;
 	private RentStatus rentStatus;
 
-	public RentDTO(Rent rent) {
+	public RentDto(Rent rent) {
 		BeanUtils.copyProperties(rent, this);
 	}
 

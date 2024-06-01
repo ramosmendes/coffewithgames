@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coffeewgames.entities.Computer;
-import com.coffeewgames.services.ComputerService;
+import com.coffeewgames.entities.User;
+import com.coffeewgames.services.UserService;
 
 @RestController
-@RequestMapping(value = "/pcs")
-public class ComputerResource {
+@RequestMapping(value = "/users")
+public class UserController {
 
 	@Autowired
-	private ComputerService service;
+	private UserService service;
 
 	@GetMapping
-	public ResponseEntity<List<Computer>> findAll() {
-		List<Computer> list = service.findAll();
+	public ResponseEntity<List<User>> findAll() {
+		List<User> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Computer> findById(@PathVariable Long id) {
-		Computer obj = service.findById(id);
+	public ResponseEntity<User> findById(@PathVariable Long id) {
+		User obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Computer> insert(@RequestBody Computer obj) {
+	public ResponseEntity<User> insert(@RequestBody User obj) {
 		obj = service.insert(obj);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -48,7 +48,7 @@ public class ComputerResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Computer> update(@PathVariable Long id, @RequestBody Computer obj) {
+	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}

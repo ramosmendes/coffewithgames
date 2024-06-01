@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coffeewgames.entities.Rent;
-import com.coffeewgames.services.RentService;
+import com.coffeewgames.entities.Computer;
+import com.coffeewgames.services.ComputerService;
 
 @RestController
-@RequestMapping(value = "/rents")
-public class RentResource {
+@RequestMapping(value = "/pcs")
+public class ComputerController {
 
 	@Autowired
-	private RentService service;
+	private ComputerService service;
 
 	@GetMapping
-	public ResponseEntity<List<Rent>> findAll() {
-		List<Rent> list = service.findAll();
+	public ResponseEntity<List<Computer>> findAll() {
+		List<Computer> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Rent> findById(@PathVariable Long id) {
-		Rent obj = service.findById(id);
+	public ResponseEntity<Computer> findById(@PathVariable Long id) {
+		Computer obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Rent> insert(@RequestBody Rent obj) {
+	public ResponseEntity<Computer> insert(@RequestBody Computer obj) {
 		obj = service.insert(obj);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -48,9 +48,8 @@ public class RentResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Rent> update(@PathVariable Long id, @RequestBody Rent obj) {
+	public ResponseEntity<Computer> update(@PathVariable Long id, @RequestBody Computer obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
-
 }

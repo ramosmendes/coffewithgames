@@ -44,7 +44,12 @@ public class UserService {
 		entity.setEmail(obj.getEmail());
 		entity.setAge(obj.getAge());
 		entity.setWallet(obj.getWallet());
-		entity.setAdult();
+	}
+
+	public boolean isAdult(User user) {
+		if (user.getAge() >= 18)
+			return true;
+		return false;
 	}
 
 }

@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.hibernate.annotations.Formula;
-
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,11 +44,6 @@ public class User implements Serializable {
 	@Column(name = "age")
 	private Integer age;
 
-	@Nonnull
-	@Formula("CASE WHEN age >= 18 THEN true ELSE false END")
-	@Column(name = "is_adult")
-	private boolean adult;
-
 	@OneToMany(mappedBy = "client")
 	private Set<Rent> rents = new HashSet<>();
 
@@ -65,7 +58,6 @@ public class User implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.wallet = wallet;
-		this.adult = age >= 18;
 	}
 
 	public String getName() {
@@ -110,14 +102,6 @@ public class User implements Serializable {
 
 	public void setAge(Integer age) {
 		this.age = age;
-	}
-
-	public boolean getAdult() {
-		return adult;
-	}
-
-	public void setAdult() {
-		this.adult = getAge() >= 18;
 	}
 
 	public Set<Rent> getRent() {

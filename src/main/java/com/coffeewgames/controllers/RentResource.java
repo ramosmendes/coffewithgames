@@ -1,4 +1,4 @@
-package com.coffeewgames.resources;
+package com.coffeewgames.controllers;
 
 import java.util.List;
 

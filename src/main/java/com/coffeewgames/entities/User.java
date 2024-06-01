@@ -19,21 +19,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
-
-	public User() {
-
-	}
-
-	public User(String name, Integer age, String email, String password, Double wallet) {
-		super();
-		this.name = name;
-		this.age = age;
-		this.email = email;
-		this.password = password;
-		this.wallet = wallet;
-		this.adult = age >= 18;
-	}
-
 	private static final long serialVersionUID = 1;
 
 	@Id
@@ -68,6 +53,20 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy = "client")
 	private Set<Rent> rents = new HashSet<>();
+
+	public User() {
+
+	}
+
+	public User(String name, Integer age, String email, String password, Double wallet) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.email = email;
+		this.password = password;
+		this.wallet = wallet;
+		this.adult = age >= 18;
+	}
 
 	public String getName() {
 		return name;

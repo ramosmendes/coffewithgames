@@ -1,5 +1,9 @@
 package com.coffeewgames.repositories;
 
-public class FoodRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.coffeewgames.entities.Food;
+
+public interface FoodRepository extends JpaRepository<Food, Long> {
 
 }

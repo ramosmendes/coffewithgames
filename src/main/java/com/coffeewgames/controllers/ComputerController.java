@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coffeewgames.dto.ComputerDto;
 import com.coffeewgames.entities.Computer;
 import com.coffeewgames.services.ComputerService;
 
@@ -24,21 +25,21 @@ public class ComputerController {
 	private ComputerService service;
 
 	@GetMapping
-	public ResponseEntity<List<Computer>> findAll() {
-		List<Computer> list = service.findAll();
+	public ResponseEntity<List<ComputerDto>> findAll() {
+		List<ComputerDto> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Computer> findById(@PathVariable Long id) {
-		Computer obj = service.findById(id);
+	public ResponseEntity<ComputerDto> findById(@PathVariable Long id) {
+		ComputerDto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Computer> insert(@RequestBody Computer obj) {
-		obj = service.insert(obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<ComputerDto> insert(@RequestBody Computer obj) {
+		ComputerDto dto = service.insert(obj);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -48,8 +49,8 @@ public class ComputerController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Computer> update(@PathVariable Long id, @RequestBody Computer obj) {
-		obj = service.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<ComputerDto> update(@PathVariable Long id, @RequestBody Computer obj) {
+		ComputerDto dto = service.update(id, obj);
+		return ResponseEntity.ok().body(dto);
 	}
 }

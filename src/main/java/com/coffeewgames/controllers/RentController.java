@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coffeewgames.dto.RentDto;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.services.RentService;
 
@@ -24,21 +25,21 @@ public class RentController {
 	private RentService service;
 
 	@GetMapping
-	public ResponseEntity<List<Rent>> findAll() {
-		List<Rent> list = service.findAll();
+	public ResponseEntity<List<RentDto>> findAll() {
+		List<RentDto> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Rent> findById(@PathVariable Long id) {
-		Rent obj = service.findById(id);
+	public ResponseEntity<RentDto> findById(@PathVariable Long id) {
+		RentDto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Rent> insert(@RequestBody Rent obj) {
-		obj = service.insert(obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<RentDto> insert(@RequestBody Rent rent) {
+		RentDto dto = service.insert(rent);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -48,9 +49,9 @@ public class RentController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Rent> update(@PathVariable Long id, @RequestBody Rent obj) {
-		obj = service.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<RentDto> update(@PathVariable Long id, @RequestBody Rent rent) {
+		RentDto dto = service.update(id, rent);
+		return ResponseEntity.ok().body(dto);
 	}
 
 }

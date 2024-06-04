@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coffeewgames.dto.UserDto;
 import com.coffeewgames.entities.User;
 import com.coffeewgames.services.UserService;
 
@@ -24,21 +25,21 @@ public class UserController {
 	private UserService service;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
-		List<User> list = service.findAll();
+	public ResponseEntity<List<UserDto>> findAll() {
+		List<UserDto> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id) {
-		User obj = service.findById(id);
+	public ResponseEntity<UserDto> findById(@PathVariable Long id) {
+		UserDto obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<User> insert(@RequestBody User obj) {
-		obj = service.insert(obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<UserDto> insert(@RequestBody User user) {
+		UserDto dto = service.insert(user);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -48,8 +49,8 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj) {
-		obj = service.update(id, obj);
+	public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody User user) {
+		UserDto obj = service.update(id, user);
 		return ResponseEntity.ok().body(obj);
 	}
 }

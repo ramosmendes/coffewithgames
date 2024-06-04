@@ -9,7 +9,6 @@ public class UserDto {
 	private Long id;
 	private String name;
 	private String email;
-	private Double wallet;
 
 	public UserDto(User user) {
 		BeanUtils.copyProperties(user, this);
@@ -41,14 +40,6 @@ public class UserDto {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Double getWallet() {
-		return wallet;
-	}
-
-	public void setWallet(Double wallet) {
-		this.wallet = wallet;
 	}
 
 }

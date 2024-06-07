@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import org.springframework.beans.BeanUtils;
 
+import com.coffeewgames.entities.Computer;
+import com.coffeewgames.entities.Payment;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.enums.RentStatus;
 
@@ -13,6 +15,9 @@ public class RentDto {
 	private Instant moment;
 	private Double value;
 	private RentStatus rentStatus;
+	private Computer pc;
+	private Payment payment;
+
 
 	public RentDto(Rent rent) {
 		BeanUtils.copyProperties(rent, this);
@@ -48,6 +53,22 @@ public class RentDto {
 
 	public void setRentStatus(RentStatus rentStatus) {
 		this.rentStatus = rentStatus;
+	}
+
+	public Computer getPc() {
+		return pc;
+	}
+
+	public void setPc(Computer pc) {
+		this.pc = pc;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 }

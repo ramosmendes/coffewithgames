@@ -1,9 +1,11 @@
 package com.coffeewgames.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
@@ -44,8 +46,9 @@ public class User implements Serializable {
 	@Column(name = "age")
 	private Integer age;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private Set<Rent> rents = new HashSet<>();
+	private List<Rent> rents = new ArrayList<>();
 
 	public User() {
 
@@ -104,7 +107,7 @@ public class User implements Serializable {
 		this.age = age;
 	}
 
-	public Set<Rent> getRent() {
+	public List<Rent> getRent() {
 		return rents;
 	}
 

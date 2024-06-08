@@ -4,11 +4,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.coffeewgames.dto.ComputerDto;
 import com.coffeewgames.entities.Computer;
 import com.coffeewgames.repositories.ComputerRepository;
+import com.coffeewgames.services.exceptions.DatabaseException;
+import com.coffeewgames.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ComputerService {
@@ -23,7 +29,9 @@ public class ComputerService {
 	}
 
 	public ComputerDto findById(Long id) {
-		Computer obj = repository.findById(id).get();
+		Computer obj = repository.findById(id).orElse(null);
+		if (obj == null)
+			throw new ResourceNotFoundException(id);
 		ComputerDto dto = new ComputerDto(obj);
 		return dto;
 	}
@@ -35,15 +43,25 @@ public class ComputerService {
 	}
 
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 
 	public ComputerDto update(Long id, Computer pc) {
-		Computer obj = repository.getReferenceById(id);
-		updateData(obj, pc);
-		repository.save(obj);
-		ComputerDto dto = new ComputerDto(obj);
-		return dto;
+		try {
+			Computer obj = repository.getReferenceById(id);
+			updateData(obj, pc);
+			repository.save(obj);
+			ComputerDto dto = new ComputerDto(obj);
+			return dto;
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Computer obj, Computer pc) {

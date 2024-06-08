@@ -20,10 +20,6 @@ public class UserDto {
 		this.rents.addAll(user.getRent());
 	}
 
-	public UserDto() {
-
-	}
-
 	public Long getId() {
 		return id;
 	}

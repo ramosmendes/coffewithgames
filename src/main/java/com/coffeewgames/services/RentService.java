@@ -69,6 +69,6 @@ public class RentService {
 	private void updateData(Rent obj, Rent rent) {
 		obj.setMoment(Instant.now());
 		obj.setTime(rent.getTime());
-		obj.setValue(rent.getPc());
+		obj.calculateValue(rent.getPc());
 	}
 }

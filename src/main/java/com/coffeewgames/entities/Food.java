@@ -3,11 +3,15 @@ package com.coffeewgames.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,13 +30,14 @@ public class Food implements Serializable {
 	@Column(name = "price")
 	private Double price;
 
-	@Column(name = "quantity")
-	private Integer quantity;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "rent_id")
+	private Rent rent;
 
-	public Food(String name, Double price, Integer quantity) {
+	public Food(String name, Double price) {
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
 	}
 
 	public Food() {
@@ -55,12 +60,12 @@ public class Food implements Serializable {
 		this.price = price;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
+	public Rent getRent() {
+		return rent;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setRent(Rent rent) {
+		this.rent = rent;
 	}
 
 	@Override

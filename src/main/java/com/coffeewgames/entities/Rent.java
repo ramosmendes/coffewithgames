@@ -2,6 +2,8 @@ package com.coffeewgames.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.coffeewgames.entities.enums.RentStatus;
@@ -17,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -52,6 +55,11 @@ public class Rent implements Serializable {
 	@JoinColumn(name = "computer_id")
 	private Computer pc;
 
+	@JsonIgnore
+	@OneToMany
+	@JoinColumn(name = "rent_id")
+	private List<Food> foods = new ArrayList<>();
+
 	@OneToOne(mappedBy = "rent", cascade = CascadeType.ALL)
 	private Payment payment;
 
@@ -63,10 +71,19 @@ public class Rent implements Serializable {
 		super();
 		this.moment = Instant.now();
 		this.time = time;
-		setValue(pc);
+		calculateValue(pc);
 		rentStatus = RentStatus.PENDING;
 		this.client = client;
 		this.pc = pc;
+	}
+
+	public void addFood(Food food) {
+		this.foods.add(food);
+		setValue(getValue() + food.getPrice());
+	}
+
+	public void removeFood(Food food) {
+		this.foods.remove(food);
 	}
 
 	public RentStatus getRentStatus() {
@@ -126,7 +143,11 @@ public class Rent implements Serializable {
 		return value;
 	}
 
-	public void setValue(Computer pc) {
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	public void calculateValue(Computer pc) {
 		switch (pc.getTypePc().getCode()) {
 		case 1:
 			value = 1 * time;
@@ -144,6 +165,14 @@ public class Rent implements Serializable {
 			throw new IllegalArgumentException("code invalid");
 		}
 
+	}
+
+	public List<Food> getFood() {
+		return foods;
+	}
+
+	public void setFood(List<Food> foods) {
+		this.foods = foods;
 	}
 
 	@Override

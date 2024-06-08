@@ -1,10 +1,13 @@
 package com.coffeewgames.dto;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
 import com.coffeewgames.entities.Computer;
+import com.coffeewgames.entities.Food;
 import com.coffeewgames.entities.Payment;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.enums.RentStatus;
@@ -17,10 +20,11 @@ public class RentDto {
 	private RentStatus rentStatus;
 	private Computer pc;
 	private Payment payment;
-
+	private List<Food> foods = new ArrayList<>();
 
 	public RentDto(Rent rent) {
 		BeanUtils.copyProperties(rent, this);
+		this.foods.addAll(rent.getFood());
 	}
 
 	public Long getId() {
@@ -69,6 +73,14 @@ public class RentDto {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+
+	public List<Food> getFoods() {
+		return foods;
+	}
+
+	public void setFoods(List<Food> foods) {
+		this.foods = foods;
 	}
 
 }

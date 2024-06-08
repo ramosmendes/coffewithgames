@@ -8,11 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.coffeewgames.entities.Computer;
+import com.coffeewgames.entities.Food;
 import com.coffeewgames.entities.Payment;
 import com.coffeewgames.entities.Rent;
 import com.coffeewgames.entities.User;
 import com.coffeewgames.entities.enums.TypePc;
 import com.coffeewgames.repositories.ComputerRepository;
+import com.coffeewgames.repositories.FoodRepository;
 import com.coffeewgames.repositories.RentRepository;
 import com.coffeewgames.repositories.UserRepository;
 
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 	private ComputerRepository pcRepository;
 
 	@Autowired
+	private FoodRepository foodRepository;
+
+	@Autowired
 	private RentRepository rentRepository;
 
 	public void run(String... args) throws Exception {
@@ -39,17 +44,26 @@ public class TestConfig implements CommandLineRunner {
 		Computer c3 = new Computer("PC-03", TypePc.ULTRA);
 		Computer c4 = new Computer("PC-04", TypePc.MEDIUM);
 
-		Rent r1 = new Rent(u1, c1,1.0);
-		Rent r2 = new Rent(u1, c2,2.0);
-		Rent r3 = new Rent(u2, c3,2.5);
+		Food f1 = new Food("Coca-cola", 5.50);
+		Food f2 = new Food("Salgadinho doritos", 10.20);
+		Food f3 = new Food("Energético Monster", 8.99);
+
+		Rent r1 = new Rent(u1, c1, 1.0);
+		Rent r2 = new Rent(u1, c2, 2.0);
+		Rent r3 = new Rent(u2, c3, 2.5);
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		pcRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
+		foodRepository.saveAll(Arrays.asList(f1, f2, f3));
 		rentRepository.saveAll(Arrays.asList(r1, r2, r3));
 
 		Payment p1 = new Payment(r1);
+		r1.addFood(f1);
+		r1.addFood(f2);
+		r2.addFood(f3);
 		r1.setPayment(p1);
 
 		rentRepository.save(r1);
+		rentRepository.save(r2);
 	}
 }

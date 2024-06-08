@@ -67,7 +67,6 @@ public class FoodService {
 	private void updateData(Food obj, Food food) {
 		obj.setName(food.getName());
 		obj.setPrice(food.getPrice());
-		obj.setQuantity(food.getQuantity());
 	}
 
 }
